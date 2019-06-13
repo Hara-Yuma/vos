@@ -27,7 +27,7 @@ def DrawElement(canvas, ElemList, num, color):
     canvas.update()
 
 # Range Drawing Function #
-##
+## This function can draw a graph of a given range
 def RangeDrawing(start, goal, canvas, ElemList, color):
     for i in range(start, goal + 1):
         DrawElement(canvas, ElemList, i, color)
@@ -62,6 +62,12 @@ def DrawGraph(SortType, ElemNum):
         ElemList = SortFuncs.SelectionSort(canvas, ElemList, ElemNum)
     elif SortType == 2:
         ElemList = SortFuncs.InsertSort(canvas, ElemList, ElemNum)
+    elif SortType == 3:
+        ElemList = SortFuncs.HeapSort(canvas, ElemList, ElemNum)
+    elif SortType == 4:
+        ElemList = SortFuncs.MergeSort(canvas, ElemList, ElemNum)
+    elif SortType == 5:
+        ElemList = SortFuncs.QuickSort(canvas, ElemList, ElemNum)
 
     if ElemNum > 200:
         d = 0

@@ -59,7 +59,7 @@ def HeapSort(canvas, ElemList, ElemNum):
 
 # Merge Sort Function #
 def MergeSort(canvas, ElemList, ElemNum):
-    return ElemList
+    return _SortFuncs._MergeSort(canvas, ElemList, 0, ElemNum)
 
 # Quick Sort Function #
 def QuickSort(canvas, ElemList, ElemNum):
