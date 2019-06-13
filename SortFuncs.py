@@ -63,4 +63,4 @@ def MergeSort(canvas, ElemList, ElemNum):
 
 # Quick Sort Function #
 def QuickSort(canvas, ElemList, ElemNum):
-    return ElemList
+    return _SortFuncs._QuickSort(canvas, ElemList, 0, ElemNum)
