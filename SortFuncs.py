@@ -1,5 +1,6 @@
  #!/usr/bin/env python3
 import time
+import heapq
 
 import script
 import _SortFuncs
@@ -55,6 +56,16 @@ def InsertSort(canvas, ElemList, ElemNum):
 
 # Heap Sort Function #
 def HeapSort(canvas, ElemList, ElemNum):
+    heap = []
+    for i in range(0, ElemNum):
+        script.DrawElement(canvas, ElemList, i, "red")
+        time.sleep(script.delay["time"])
+        script.DrawElement(canvas, ElemList, i, "white")
+        heapq.heappush(heap, ElemList[i])
+        script.RangeDrawing(0, i, canvas, heap, "white")
+    for i in range(0, ElemNum):
+        ElemList[i] = heapq.heappop(heap)
+        script.RangeDrawing(i, ElemNum - 1, canvas, ElemList[:i+1] + heap, "white")
     return ElemList
 
 # Merge Sort Function #
