@@ -13,6 +13,21 @@ delay = {"time": 0}
 
 ElemSize = {}
 
+# Warning Function #
+def warning(text):
+    WarningWindow = tk.Toplevel()
+    WarningWindow.geometry("500x100")
+    WarningWindow.title("Warning")
+    WarningWindow.resizable(0, 0)
+    MessageLabel = tk.Label(WarningWindow, text = text)
+    MessageLabel.pack(pady = 10)
+    def finish(event):
+        WarningWindow.destroy()
+    OkButton = tk.Button(WarningWindow, text = "OK", width = 4)
+    OkButton.pack(pady = 10)
+    OkButton.bind("<Button-1>", finish)
+    WarningWindow.mainloop()
+
 # Draw Element Function #
 ## This function can draw an element of graph
 ## by receiving the canvs, the position of the element(num),
@@ -36,6 +51,9 @@ def RangeDrawing(start, goal, canvas, ElemList, color):
 ## Open the window for drawing a graph,
 ## and then, call the sort function selected by user
 def DrawGraph(SortType, ElemNum):
+    if (ElemNum <= 0) or (1000 < ElemNum):
+        warning("\"Number of Elements to sort\" should be integer between 1 to 1000")
+        return
     GraphWindow = tk.Toplevel()
     GraphWindow.geometry("{}x{}".format(GW, GH))
     GraphWindow.title("Graph")
@@ -61,7 +79,7 @@ def DrawGraph(SortType, ElemNum):
     elif SortType == 1:
         ElemList = SortFuncs.SelectionSort(canvas, ElemList, ElemNum)
     elif SortType == 2:
-        ElemList = SortFuncs.InsertSort(canvas, ElemList, ElemNum)
+        ElemList = SortFuncs.InsertionSort(canvas, ElemList, ElemNum)
     elif SortType == 3:
         ElemList = SortFuncs.HeapSort(canvas, ElemList, ElemNum)
     elif SortType == 4:
@@ -119,7 +137,7 @@ def main():
     BS.place(x = 10, y = 40)
     SS = tk.Radiobutton(root, value = 1, variable = var, text = "Selection Sort")
     SS.place(x = 160, y = 40)
-    IS = tk.Radiobutton(root, value = 2, variable = var, text = "Insert Sort")
+    IS = tk.Radiobutton(root, value = 2, variable = var, text = "Insertion Sort")
     IS.place(x = 310, y = 40)
     HS = tk.Radiobutton(root, value = 3, variable = var, text = "Heap Sort")
     HS.place(x = 10, y = 70)
@@ -144,7 +162,11 @@ def main():
 
     def CallDrawGraph(event):
         delay["time"] = float(GetDelayTime.get())
-        DrawGraph(var.get(), int(GetElemNum.get()))
+        if 0 <= delay["time"]:
+            DrawGraph(var.get(), int(GetElemNum.get()))
+        else:
+            warning("\"delay\" should be a decimal fraction greater than 0.")
+            return
 
     OkButton = tk.Button(root, text = "OK", width = 4)
     OkButton.pack(pady = 10, side = "bottom")

@@ -36,8 +36,8 @@ def SelectionSort(canvas, ElemList, ElemNum):
         script.DrawElement(canvas, ElemList, min, "white")
     return ElemList
 
-# Insert Sort Function #
-def InsertSort(canvas, ElemList, ElemNum):
+# Insertion Sort Function #
+def InsertionSort(canvas, ElemList, ElemNum):
     for i in range(1, ElemNum):
         script.DrawElement(canvas, ElemList, i, "red")
         for j in reversed(range(0, i)):
